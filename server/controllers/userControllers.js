@@ -1,6 +1,8 @@
+// hola
+
 import pool from "../db/db.js";
 import bcrypt from "bcrypt";
-// bcrypt.compareSync(myPlaintextPassword, hash); // true
+
 
 export const getUsers = async (req, res) => {
 
