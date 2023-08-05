@@ -9,7 +9,7 @@ export const updateBlog = (id, blog) => axios.put(`http://localhost:4000/blog/${
 export const createUser = (user) => axios.post('http://localhost:4000/user', user);
 export const getUsers = () => axios.get('http://localhost:4000/user');
 
-export const loginUser = (user) => axios.post('http://localhost:4000/user', user);
+export const loginUser = (user) => axios.post('http://localhost:4000/user/login', user);
 
 export const getUser = (id) => axios.get(`http://localhost:4000/user/${id}`);
 export const deleteUser = (id) => axios.delete(`http://localhost:4000/user/${id}`);

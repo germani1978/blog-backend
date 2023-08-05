@@ -4,28 +4,25 @@ import {
     getUser,
     getUsers,
     deleteUser,
-    addUser,
+    registerUser,
     updateUser,
+    loginUser,
 } from '../controllers/userControllers.js'
 
 const router = Router();
 
-//get todos los user
 router.get('/', getUsers);
 
-//get 1 user
 router.get('/:id', getUser);
 
-//delete 1 user
 router.delete('/:id', deleteUser);
 
-//create 1 user
-router.post('/', addUser);
+router.post('/', registerUser);
 
-// actualiza un user
 router.put('/:id', updateUser);
 
-// router.post('/login', loginUser);
+router.post('/login', loginUser);
+
 
 
 export default router;

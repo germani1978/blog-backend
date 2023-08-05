@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { getUser } from "../api/api";
-import { useState } from "react";
+import { loginUser } from "../api/api";
+import { useEffect, useState } from "react";
 
 const styleInput =
   "input-login px-3 py-1 outline-none mb-2 text-gray-600 w-full border-b border-solid border-gray";
@@ -18,7 +18,8 @@ const Login = () => {
 
     e.preventDefault();
 
-    getUser(user)
+
+    loginUser(user)
       .then( (data) => {
         console.log(data);
         navigate("/");
