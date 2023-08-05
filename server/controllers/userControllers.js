@@ -1,4 +1,3 @@
-// hola
 
 import pool from "../db/db.js";
 import bcrypt from "bcrypt";
