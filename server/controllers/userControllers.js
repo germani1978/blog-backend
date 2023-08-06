@@ -19,7 +19,7 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
 
    try {
-
+ 
       const [resp] = await pool.query("SELECT * FROM user WHERE id_user = ?", req.params.id);
 
       res.status(200).json(resp);
