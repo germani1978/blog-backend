@@ -2,7 +2,6 @@ import pool from "../db/db.js";
 
 export const getBlogs = async (req, res) => {
 
-   return res.status(200).json("Hola");
 
    try {
 
