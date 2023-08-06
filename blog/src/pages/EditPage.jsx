@@ -32,7 +32,7 @@ const EditPage = () => {
     const formdata = new FormData();
     formdata.append('file', fileImg)
     try {
-      const resp = await axios.post("http://localhost:4000/upload", formdata);
+      const resp = await axios.post("http://localhost:8800/upload", formdata);
       console.log(resp.data);
     } catch (error) {
       console.error(error.message);

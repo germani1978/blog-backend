@@ -1,6 +1,9 @@
 
 import pool from "../db/db.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import cookieParser from 'cookie-parser';
+
 
 export const getUsers = async (req, res) => {
 
@@ -61,6 +64,8 @@ export const registerUser = async (req, res) => {
          ? res.status(404).json({ msg: "Not add" })
          : res.sendStatus(204);
 
+      
+
    } catch (error) {
       res.status(500).json(error.message);
    }
@@ -70,20 +75,28 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
 
    try {
-      const { username, password } = req.body;
 
-      const data = await pool.query("SELECT * FROM user WHERE username = ?", username)
+      const data = await pool.query("SELECT * FROM user WHERE username = ?", req.body.username)
 
       if (data[0].length === 0) 
          return res.status(404).json("Not user found");
 
       const user = data[0][0];
 
-      const isPasswordOK = bcrypt.compareSync(password, user.password);
+      const isPasswordOK = bcrypt.compareSync(req.body.password, user.password);
             
-      (isPasswordOK) 
-         ? res.sendStatus(202)
-         : res.status(404).json("Not password ok");
+      if (!isPasswordOK) {return res.status(404).json("Not password ok")}
+
+
+      //Si llega aqui no hay problema con el usuario y la contrasena
+
+      const tokenId = jwt.sign({id: user.id_user},'jwtkey');
+
+      const { password, ...other } = user;
+
+      res.cookie("access_token", tokenId, {
+      }).status(200).json(other);
+
 
    } catch (error) {
       res.status(500).json(error.message);

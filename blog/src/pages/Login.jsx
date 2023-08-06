@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../api/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const styleInput =
   "input-login px-3 py-1 outline-none mb-2 text-gray-600 w-full border-b border-solid border-gray";
@@ -14,21 +14,31 @@ const Login = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
 
     e.preventDefault();
 
+    try {
+      await axios.post('http://localhost:8800/user/login', user);
+      // console.log(res);
+      navigate("/");
+    } catch (err) {
+      console.error(err.message)
+      setError(true);
+      setTimeout(() => setError(false), 3000);
+    }
 
-    loginUser(user)
-      .then( (data) => {
-        console.log(data);
-        navigate("/");
-      } )
-      .catch( (err) => {
-        console.error(err.message)
-        setError(true);
-        setTimeout(() => setError(false), 3000);
-      });
+
+    // axios.post('http://localhost:8800/user/login', user)
+    //   .then( (data) => {
+    //     console.log(data);
+    //     navigate("/");
+    //   } )
+    //   .catch( (err) => {
+    //     console.error(err.message)
+    //     setError(true);
+    //     setTimeout(() => setError(false), 3000);
+    //   });
   }
 
   return (
