@@ -1,9 +1,13 @@
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import PenBlack from "./PenBlack";
+import { AuthContext } from "../context/authContext";
+import { useContext } from "react";
 
 const NavBar = () => {
 
+  const { currentUser, logout } = useContext(AuthContext);
+ 
   return (
     <div className="w-full bg-slate-500 flex justify-between items-center py-3 px-6">
       <button className="w-16">
@@ -35,6 +39,12 @@ const NavBar = () => {
             </li>
             <li className="hover:scale-110">
               <a  href="/edit"><PenBlack/></a>
+            </li>
+            <li className="hover:scale-110">
+              <span className="text-blue-700">{currentUser?.username}</span>
+            </li>
+            <li className="hover:scale-110 ">
+              { currentUser ? <button className="text-red-900" onClick={logout}>LOGOUT</button> : <a href="/login">LOGIN</a>}
             </li>
           </ul> 
         </nav>

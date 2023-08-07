@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { loginUser } from "../api/api";
+import { AuthContext } from "../context/authContext";
 
 const styleInput =
   "input-login px-3 py-1 outline-none mb-2 text-gray-600 w-full border-b border-solid border-gray";
@@ -13,14 +14,15 @@ const Login = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
 
     e.preventDefault();
 
     try {
-      const data = await loginUser(user);
-      console.log(data);
+      // const data = await loginUser(user);
+      await login(user);
       navigate("/");
     } catch (err) {
       console.error(err.message)

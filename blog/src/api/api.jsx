@@ -10,6 +10,7 @@ export const createUser = (user) => axios.post('http://localhost:4000/user', use
 export const getUsers = () => axios.get('http://localhost:4000/user');
 
 export const loginUser = (user) => axios.post('http://localhost:4000/user/login', user);
+export const logout = () => axios.post('http://localhost:4000/user/logout');
 
 export const getUser = (id) => axios.get(`http://localhost:4000/user/${id}`);
 export const deleteUser = (id) => axios.delete(`http://localhost:4000/user/${id}`);
