@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
-import { loginUser, logout } from "../api/api";
+import { loginUser,  logoutUser } from "../api/api";
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
         setCurrentUser(res.data);
     }
     const logout = async (inputs) => {
-        // await logout(inputs);
+        await logoutUser(inputs);    
         setCurrentUser(null);
     }
 

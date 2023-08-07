@@ -16,36 +16,32 @@ const NavBar = () => {
       <div className="nav">
         <nav>
          <ul className="flex text-slate-200 font-bold text-lg justify-center items-center gap-6 uppercase"> 
-            <li className="hover:scale-110">
-              <a className="" href="/ciencia">Ciencia</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/arte">Arte</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/economia">Economía</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/politica">Política</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/musica">Música</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/tiempo">Tiempo</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/naturaleza">Naturaleza</a>
-            </li>
-            <li className="hover:scale-110">
-              <a  href="/edit"><PenBlack/></a>
-            </li>
-            <li className="hover:scale-110">
-              <span className="text-blue-700">{currentUser?.username}</span>
-            </li>
-            <li className="hover:scale-110 ">
-              { currentUser ? <button className="text-red-900" onClick={logout}>LOGOUT</button> : <a href="/login">LOGIN</a>}
-            </li>
+            <Link to="/?cat=ciencia">
+              <h6>Ciencia</h6>
+            </Link>
+            <Link to="/?cat=arte">
+              <h6>Arte</h6>
+            </Link>
+            <Link to="/?cat=economia">
+              <h6>Economia</h6>
+            </Link>
+            <Link to="/?cat=politica">
+              <h6>Politica</h6>
+            </Link>
+            <Link to="/?cat=musica">
+              <h6>Musica</h6>
+            </Link>
+            <Link to="/?cat=tiempo">
+              <h6>Tiempo</h6>
+            </Link>
+            <Link to="/?cat=naturaleza">
+              <h6>Naturaleza</h6>
+            </Link>
+            <Link to="/edit">
+              <PenBlack/>
+            </Link>
+            <span className="text-blue-700">{currentUser?.username}</span>
+            { currentUser ? <button className="text-red-900" onClick={logout}>LOGOUT</button> : <a href="/login">LOGIN</a>}
           </ul> 
         </nav>
       </div>

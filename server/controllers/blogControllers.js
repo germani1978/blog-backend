@@ -2,10 +2,12 @@ import pool from "../db/db.js";
 
 export const getBlogs = async (req, res) => {
 
+   const cat = req.query.cat;
+
 
    try {
 
-      const [resp] = await pool.query("SELECT * FROM blogs");
+      const [resp] = cat ? await pool.query("SELECT * FROM blogs WHERE tag=?", [cat]) : await pool.query("SELECT * FROM blogs");
 
       res.status(200).json(resp);
 

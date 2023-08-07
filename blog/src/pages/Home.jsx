@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getBlogs } from "../api/api.jsx";
 
 
 const useFetchData = () => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  const cat = useLocation().search;
+
 
   useEffect(() => {
-    getBlogs()
+    getBlogs(cat)
       .then((resp) => {
         setBlogs(resp.data);
         setLoading(false);
       })
       .catch((err) => console.error(err.message));
-  }, []);
+  }, [cat]);
 
   return { loading, blogs };
 };

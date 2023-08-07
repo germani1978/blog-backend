@@ -21,7 +21,6 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // const data = await loginUser(user);
       await login(user);
       navigate("/");
     } catch (err) {
