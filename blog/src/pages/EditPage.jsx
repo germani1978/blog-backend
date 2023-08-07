@@ -14,25 +14,27 @@ import Edit from "../components/Edit.jsx";
 
 // TITLE y CONTENIDO
 const EditPage = () => {
-
+  
   const id = useParams().id;
-  const [fileImg, setFileImg] = useState(null);
-  const [blog, setBlog] = useState({ titulo: "", contenido: "", created_by: 2, tag: "", img: "" });
   const navigate = useNavigate();
-
+  const [fileImg, setFileImg] = useState(null);
+  const [blog, setBlog] = useState({ titulo: "", contenido: "", created_by: 25, tag: "", img: "" });
+  
   useEffect(() => {
+
+
     if (id) {
       getBlog(id) //ACTUALIZANDO
         .then( resp =>  setBlog(resp.data))
         .catch( err => console.error(err.message));
     }
-  }, [id])
+  }, [ id, navigate])
   
   const uploadImg = async () => {
     const formdata = new FormData();
     formdata.append('file', fileImg)
     try {
-      const resp = await axios.post("http://localhost:8800/upload", formdata);
+      const resp = await axios.post("http://localhost:4000/upload", formdata);
       console.log(resp.data);
     } catch (error) {
       console.error(error.message);
@@ -49,6 +51,9 @@ const EditPage = () => {
     
 
     if (!id) {
+
+      console.log({id});
+      console.log({blog});
 
       try {
         await createBlog(blog);

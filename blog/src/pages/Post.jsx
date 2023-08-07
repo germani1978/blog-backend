@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Pen from "../components/Pen.jsx";
 import Trash from "../components/Trash.jsx";
 import { deleteBlog, getBlog } from "../api/api.jsx";
+import { AuthContext } from '../context/authContext.jsx'
 
 
 const useFetchData = (id) => {
+
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState(null);
 
@@ -28,7 +30,7 @@ const Post = () => {
   const id = useParams().id;
   const { loading, blog } = useFetchData(id);
   const navigate = useNavigate();
-
+  const {currentUser} = useContext( AuthContext );
 
   const handleEdit = () => navigate(`/edit/${id}`);
 
@@ -56,6 +58,9 @@ const Post = () => {
           src={`../upload/${blog.img}`}
           alt="foto"
         />
+      </div>
+      <div>
+        { currentUser.username }
       </div>
       <p className="bg-blue-400 py-1 px-5 font-sans inline-block rounded mb-1 mt-1">
         {blog.tag}
