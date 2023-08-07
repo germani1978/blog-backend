@@ -11,6 +11,8 @@ export const getUsers = async (req, res) => {
 
       const [resp] = await pool.query("SELECT * FROM user");
 
+      if (resp.length === 0) return res.sendStatus(404);
+
       res.status(200).json(resp);
 
    } catch (error) {
@@ -25,7 +27,9 @@ export const getUser = async (req, res) => {
  
       const [resp] = await pool.query("SELECT * FROM user WHERE id_user = ?", req.params.id);
 
-      res.status(200).json(resp);
+      if (resp.length === 0) return res.sendStatus(404);
+
+      res.status(200).json(resp[0]);
 
    } catch (error) {
 

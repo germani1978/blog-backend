@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+import { loginUser } from "../api/api";
 
 const styleInput =
   "input-login px-3 py-1 outline-none mb-2 text-gray-600 w-full border-b border-solid border-gray";
@@ -19,26 +19,15 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8800/user/login', user);
-      // console.log(res);
+      const data = await loginUser(user);
+      console.log(data);
       navigate("/");
     } catch (err) {
       console.error(err.message)
       setError(true);
       setTimeout(() => setError(false), 3000);
     }
-
-
-    // axios.post('http://localhost:8800/user/login', user)
-    //   .then( (data) => {
-    //     console.log(data);
-    //     navigate("/");
-    //   } )
-    //   .catch( (err) => {
-    //     console.error(err.message)
-    //     setError(true);
-    //     setTimeout(() => setError(false), 3000);
-    //   });
+    
   }
 
   return (
