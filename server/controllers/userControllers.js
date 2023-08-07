@@ -95,6 +95,8 @@ export const loginUser = async (req, res) => {
       const { password, ...other } = user;
 
       res.cookie("access_token", tokenId, {
+         httpOnly:true,
+         sameSite: "Lax"
       }).status(200).json(other);
 
 

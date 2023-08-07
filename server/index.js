@@ -5,12 +5,17 @@ import cookieParser from 'cookie-parser';
 import { PORT } from './config.js';
 import cors from "cors";
 
+
+
+
 import blogsRouter from './routes/blogsRoutes.js'
 import usersRouter from './routes/userRoutes.js'
 
 const app = express();
 
+
 app.use(cors());
+
 app.use(express.json());
 app.use(cookieParser());
 
