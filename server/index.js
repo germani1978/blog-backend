@@ -13,23 +13,27 @@ import usersRouter from './routes/userRoutes.js'
 
 const app = express();
 
-
-app.use(cors());
-
+// Middleware
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/blog", blogsRouter);
+app.use("/user", usersRouter);
 
+
+//Fotos
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './blog/upload')
+        cb(null, './blog/public/upload')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
 })
-
 const upload = multer({ storage: storage })
-
 
 try {
     app.post('/upload', upload.single('file'), function (req, res) {
@@ -40,10 +44,7 @@ try {
 }
 
 
-app.use("/blog", blogsRouter);
-app.use("/user", usersRouter);
-
-
+//SERVER
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

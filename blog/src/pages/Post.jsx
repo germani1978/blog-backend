@@ -34,7 +34,8 @@ const Post = () => {
 
   const handleEdit = () => navigate(`/edit/${id}`);
 
-  const handleDel = async() => {
+  const handleDel = async(e) => {
+    e.preventDefault();
     try {
       await deleteBlog(id);
       navigate(`/`);
@@ -60,20 +61,23 @@ const Post = () => {
         />
       </div>
       <div>
-        { currentUser.username }
+        { blog.username }
       </div>
       <p className="bg-blue-400 py-1 px-5 font-sans inline-block rounded mb-1 mt-1">
         {blog.tag}
       </p>
-      <div className="flex text-base gap-5 p-2 mb-5 items-center justify-center">
-        <div onClick={handleEdit}>
-          <Pen />
-        </div>
-        <div onClick={handleDel}>
-          <Trash />
-        </div>
-      </div>
-      <p className="text-lg text-start  mx-auto leading-6 -tracking-wide">
+      { 
+        currentUser.username === blog.username && 
+          <div className="flex text-base gap-5 p-2 mb-5 items-center justify-center">
+            <div onClick={handleEdit}>
+              <Pen />
+            </div>
+            <div onClick={handleDel}>
+              <Trash />
+            </div>
+          </div>
+      }
+      <p className="text-lg text-start  mx-auto my-2 leading-6 -tracking-wide">
         {blog.contenido}
       </p>
     </div>
